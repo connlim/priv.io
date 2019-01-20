@@ -6,6 +6,12 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
 from collections import Counter
 
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+
+lem = WordNetLemmatizer()
 
 lem = WordNetLemmatizer()
 filename = 'test.txt'
@@ -44,7 +50,7 @@ def get_sentence(pos, text):
 def extract(text):
     with open('keywords.json') as fp:
         json_data = json.loads(fp.read())
-    
+
     tokenized = nltk.word_tokenize(text)
     tagged = nltk.pos_tag(tokenized)
     # denoised = remove_noise(tagged)
