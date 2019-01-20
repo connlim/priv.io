@@ -12,32 +12,57 @@
 </head>
 <body>
     <div class="container">
-        <h1>We have analyzed the terms of service.</h1>
-        <h1>Here are some important points you should note:</h1>
-        <p>{{tos}}</p>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h1 style="margin-top: 20px">We have analyzed the terms of service.</h1>
+                <h1>Here are some important points you should note:</h1>
+                <small>Rest assured we do not collect any of your personal data</small>
+                <hr>
+                <!-- <p>{{tos}}</p> -->
+            </div>
+        </div> 
         {% for category in tos %}
-        <div>
-            <h2>{{ category }}</h2>
-            {% if tos[category]|length > 0 %}
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <th>Weight</th>
-                        <th>Text</th>
-                    </thead>
-                    {% for item in tos[category] | sort(attribute='weight', reverse=True) %}
-                        <tr>
-                            <td class="align-middle">
-                                {{ item['weight'] }}
-                            </td>
-                            <td>
-                                {{ item['text'] }}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                <p>No data detected</p>
-            {% endif %}
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h2>{{ category }}</h2>
+                {% if category=="Information" %}
+                    <p>Data that the company collects about you</p>
+                {% elif category=="Collection" %}
+                    <p>Ways the company collects your data</p>
+                {% elif category=="Process" %}
+                    <p>What the company does with your data</p>
+                {% elif category=="Control" %}
+                    <p>How you can control your data</p>
+                {% elif category=="Government" %}
+                    <p>Whether your data will be shared with the government</p>
+                {% elif category=="Changes" %}
+                    <p>What changes you can make to the data you shared</p>
+                {% elif category=="GDPR" %}
+                    <p>Compliance with GDPR</p>
+                {% endif %}
+            </div>
+            <div class="col-10">
+                {% if tos[category]|length > 0 %}
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <th width="75px">Weight</th>
+                            <th>Text</th>
+                        </thead>
+                        {% for item in tos[category] | sort(attribute='weight', reverse=True) %}
+                            <tr>
+                                <td width="75px" class="align-middle">
+                                    {{ item['weight'] }}
+                                </td>
+                                <td>
+                                    {{ item['text'] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>No data detected</p>
+                {% endif %}
+            </div>
         </div>
         {% endfor %}
     </div>

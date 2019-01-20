@@ -60,7 +60,7 @@ def extract(text):
 
     results = {}
     for key in json_data:
-        instances = [(x, i) for i, x in enumerate(lemmatized) for word in json_data[key] if x == word]
+        instances = [(x, i) for i, x in enumerate(lemmatized) if x.lower() in json_data[key]]
         if len(instances) > 0:
             results[key] = instances
     # print(results, end='\n\n')
@@ -83,7 +83,7 @@ def extract(text):
                 # s = re.sub(r'(\() ', r'\1', s)
 
                 counts = dict(Counter(nltk.word_tokenize(sentence)))
-                weight = sum([count for word, count in counts.items() if lem.lemmatize(word, 'v') in all_keywords])
+                weight = sum([count for word, count in counts.items() if lem.lemmatize(word, 'v').lower() in all_keywords])
 
                 # data.append({'category': key, 'word': word[0], 'weight': weight, 'text': s})
                 data[key].append({'word': word[0], 'weight': weight, 'text': sentence})
