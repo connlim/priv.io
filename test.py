@@ -1,9 +1,10 @@
+import json
+import re
+
 import nltk
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
 
-import json
-import re
 
 lem = WordNetLemmatizer()
 
@@ -39,6 +40,7 @@ def get_sentence(pos, text):
         end = len(text)
     return text[start:end]
 
+
 def main():
     with open('keywords.json') as fp:
         json_data = json.loads(fp.read())
@@ -71,4 +73,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()    
+    main()
