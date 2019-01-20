@@ -1,5 +1,5 @@
 {
-    "information": [
+    "Information": [
       "identifiers",
       "cookies",
       "user",
@@ -12,20 +12,20 @@
       "customer",
       "information"
     ],
-    "collection": [
+    "Collection": [
       "tracking",
       "collection",
       "log",
       "store",
       "retain"
     ],
-    "sharing": [
+    "Sharing": [
       "sharing",
       "third party",
       "other parties",
       "partners"
     ],
-    "process": [
+    "Process": [
       "process",
       "sell",
       "rent",
@@ -33,7 +33,7 @@
       "advertisers",
       "analytics"
     ],
-    "control": [
+    "Control": [
       "access",
       "download",
       "copy",
@@ -41,7 +41,7 @@
       "forgotten",
       "settings"
     ],
-    "government": [
+    "Government": [
       "government",
       "authorities",
       "regulators",
@@ -54,7 +54,7 @@
       "law enforcement",
       "any country or state name"
     ],
-    "changes": [
+    "Changes": [
       "changes",
       "notification",
       "notify",

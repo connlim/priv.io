@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, render_template
 from test import extract
 
 app = Flask(__name__)
@@ -20,7 +20,8 @@ def index():
 def parse_tos():
     text = request.form.getlist('tos')[0]
     print(text)
-    return json.dumps(extract(text))
+    # return json.dumps(extract(text))
+    return render_template('tos.html', tos=extract(text))
 
 
 if __name__ == '__main__':

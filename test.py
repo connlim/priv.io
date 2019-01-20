@@ -4,6 +4,7 @@ import re
 import nltk
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
+from collections import Counter
 
 
 lem = WordNetLemmatizer()
@@ -58,17 +59,31 @@ def extract(text):
             results[key] = instances
     # print(results, end='\n\n')
 
-    # Get sentence
-    sentences = []
-    for key in results:
-        for word in results[key]:
-            s = ' '.join(get_sentence(word[1], tokenized))
-            s = re.sub(r' ([.,!?\)])', r'\1', s)
-            s = re.sub(r'(\() ', r'\1', s)
-            sentences.append({'category': key, 'word': word[0], 'pos': word[1], 'text': s})
-    print(sentences, end='\n\n')
+    all_keywords = [item for sublist in json_data.values() for item in sublist]
+    print(all_keywords)
 
-    return sentences
+    # Get sentences
+    existing_sentences = []
+    data = {}
+    for key in results:
+        data[key] = []
+        for word in results[key]:
+            sentence = get_sentence(word[1], text)
+            if sentence not in existing_sentences and len(sentence) > 0:
+                existing_sentences.append(sentence)
+
+                # s = ' '.join(sentence)
+                # s = re.sub(r' ([.,\'!?\)])', r'\1', s)
+                # s = re.sub(r'(\() ', r'\1', s)
+
+                counts = dict(Counter(nltk.word_tokenize(sentence)))
+                weight = sum([count for word, count in counts.items() if lem.lemmatize(word, 'v') in all_keywords])
+
+                # data.append({'category': key, 'word': word[0], 'weight': weight, 'text': s})
+                data[key].append({'word': word[0], 'weight': weight, 'text': sentence})
+    print(data, end='\n\n')
+
+    return data
 
 
 if __name__ == '__main__':
