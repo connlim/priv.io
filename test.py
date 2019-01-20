@@ -2,6 +2,11 @@ import nltk
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
 
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+
 lem = WordNetLemmatizer()
 
 filename = 'test.txt'
@@ -36,4 +41,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()    
+    main()
