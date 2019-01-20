@@ -7,7 +7,6 @@ from nltk.corpus import stopwords, wordnet
 
 
 lem = WordNetLemmatizer()
-
 filename = 'test.txt'
 
 
@@ -41,7 +40,7 @@ def get_sentence(pos, text):
     return text[start:end]
 
 
-def main():
+def extract():
     with open('keywords.json') as fp:
         json_data = json.loads(fp.read())
     with open(filename) as fp:
@@ -73,4 +72,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    extract()
