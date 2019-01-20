@@ -1,0 +1,71 @@
+{
+    "information": [
+      "identifiers",
+      "cookies",
+      "user",
+      "payment",
+      "credit card",
+      "location",
+      "personal",
+      "sensitive",
+      "device",
+      "customer",
+      "information"
+    ],
+    "collection": [
+      "tracking",
+      "collection",
+      "log",
+      "store",
+      "retain"
+    ],
+    "sharing": [
+      "sharing",
+      "third party",
+      "other parties",
+      "partners"
+    ],
+    "process": [
+      "process",
+      "sell",
+      "rent",
+      "vendors",
+      "advertisers",
+      "analytics"
+    ],
+    "control": [
+      "access",
+      "download",
+      "copy",
+      "delete",
+      "forgotten",
+      "settings"
+    ],
+    "government": [
+      "government",
+      "authorities",
+      "regulators",
+      "request",
+      "litigation",
+      "law",
+      "legal",
+      "comply",
+      "national security",
+      "law enforcement",
+      "any country or state name"
+    ],
+    "changes": [
+      "changes",
+      "notification",
+      "notify",
+      "inform"
+    ],
+    "GDPR": [
+      "breach",
+      "access",
+      "download",
+      "delete",
+      "forgotten",
+      "Data Protection Officer"
+    ]
+  }
