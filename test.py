@@ -40,36 +40,38 @@ def get_sentence(pos, text):
     return text[start:end]
 
 
-def extract():
+def extract(text):
     with open('keywords.json') as fp:
         json_data = json.loads(fp.read())
-    with open(filename) as fp:
-        m = fp.read()
-        tokenized = nltk.word_tokenize(m)
-        tagged = nltk.pos_tag(tokenized)
-        # denoised = remove_noise(tagged)
-        lemmatized = [lem.lemmatize(word, 'v') for (word, tag) in tagged]
+    
+    tokenized = nltk.word_tokenize(text)
+    tagged = nltk.pos_tag(tokenized)
+    # denoised = remove_noise(tagged)
+    lemmatized = [lem.lemmatize(word, 'v') for (word, tag) in tagged]
 
-        print(' '.join(lemmatized), end='\n\n')
+    print(' '.join(lemmatized), end='\n\n')
 
-        results = {}
-        for key in json_data:
-            instances = [(x, i) for i, x in enumerate(lemmatized) for word in json_data[key] if x == word]
-            if len(instances) > 0:
-                results[key] = instances
-        print(results, end='\n\n')
+    results = {}
+    for key in json_data:
+        instances = [(x, i) for i, x in enumerate(lemmatized) for word in json_data[key] if x == word]
+        if len(instances) > 0:
+            results[key] = instances
+    # print(results, end='\n\n')
 
-        # Get sentence
-        sentences = {}
-        for key in results:
-            sentences[key] = {}
-            for word in results[key]:
-                s = ' '.join(get_sentence(word[1], tokenized))
-                s = re.sub(r' ([.,!?\)])', r'\1', s)
-                s = re.sub(r'(\() ', r'\1', s)
-                sentences[key][word] = s
-        print(sentences)
+    # Get sentence
+    sentences = []
+    for key in results:
+        for word in results[key]:
+            s = ' '.join(get_sentence(word[1], tokenized))
+            s = re.sub(r' ([.,!?\)])', r'\1', s)
+            s = re.sub(r'(\() ', r'\1', s)
+            sentences.append({'category': key, 'word': word[0], 'pos': word[1], 'text': s})
+    print(sentences, end='\n\n')
+
+    return sentences
 
 
 if __name__ == '__main__':
-    extract()
+    with open(filename) as fp:
+        m = fp.read()
+        extract(m)

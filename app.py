@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, request, send_from_directory
 from test import extract
 
@@ -16,8 +18,9 @@ def index():
 
 @app.route('/parse-tos', methods=['POST'])
 def parse_tos():
-    print(request.form.getlist('tos')[0])
-    return 'test'
+    text = request.form.getlist('tos')[0]
+    print(text)
+    return json.dumps(extract(text))
 
 
 if __name__ == '__main__':
