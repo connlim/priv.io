@@ -5,35 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Priv.io Results</title>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>We have analyzed the terms of service.</h2>
-    <h1>Here are some important points you should note:</h1>
-    {{ tos }}
-    {% for category in tos %}
-    <div>
-        <h2>{{ category }}</h2>
-        {% if tos[category]|length > 0 %}
-            <table>
-                <tr>
-                    <th>Weight</th>
-                    <th>Text</th>
-                </tr>
-                {% for item in tos[category] | sort(attribute='weight', reverse=True) %}
-                    <tr>
-                        <td class="align-middle">
-                            {{ item['weight'] }}
-                        </td>
-                        <td>
-                            {{ item['text'] }}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            <p>No data detected</p>
-        {% endif %}
+    <div class="container">
+        <h1>We have analyzed the terms of service.</h1>
+        <h1>Here are some important points you should note:</h1>
+        <p>{{tos}}</p>
+        {% for category in tos %}
+        <div>
+            <h2>{{ category }}</h2>
+            {% if tos[category]|length > 0 %}
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <th>Weight</th>
+                        <th>Text</th>
+                    </thead>
+                    {% for item in tos[category] | sort(attribute='weight', reverse=True) %}
+                        <tr>
+                            <td class="align-middle">
+                                {{ item['weight'] }}
+                            </td>
+                            <td>
+                                {{ item['text'] }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No data detected</p>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </body>
 </html>
